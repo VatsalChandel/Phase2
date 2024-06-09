@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nexus Software Portfolio">
+    <title>Nexus Software Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAghw_1OhfnvMgnlkJ3rDM2KWVAeh4JV0g",
+            authDomain: "phase2-744c8.firebaseapp.com",
+            databaseURL: "https://phase2-744c8-default-rtdb.firebaseio.com",
+            projectId: "phase2-744c8",
+            storageBucket: "phase2-744c8.appspot.com",
+            messagingSenderId: "1050972893863",
+            appId: "1:1050972893863:web:c15dd0f36cd7f13a142182",
+            measurementId: "G-7Y45E11TWM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        const contactFormDB = ref(database, 'contactForm');
+        const feedbackFormDB = ref(database, 'feedbackForm');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('contact-form').addEventListener('submit', submitContactForm);
+            document.getElementById('feedback-form').addEventListener('submit', submitFeedbackForm);
+        });
+
+        function submitContactForm(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            saveContactForm(name, email, message);
+            document.getElementById('contact-form').reset();
+        }
+
+        function saveContactForm(name, email, message) {
+            console.log("Saving contact form data:", { name, email, message }); 
+            const newContactForm = push(contactFormDB);
+            set(newContactForm, {
+                name: name,
+                email: email,
+                message: message
+            });
+        }
+
+        function submitFeedbackForm(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('feedback-name').value;
+            const email = document.getElementById('feedback-email').value;
+            const message = document.getElementById('feedback-message').value;
+
+            saveFeedbackForm(name, email, message);
+            document.getElementById('feedback-form').reset();
+        }
+
+        function saveFeedbackForm(name, email, message) {
+            console.log("Saving feedback form data:", { name, email, message }); 
+            const newFeedbackForm = push(feedbackFormDB);
+            set(newFeedbackForm, {
+                name: name,
+                email: email,
+                message: message
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Techy Software</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#products">Products/Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="home">
+            <h2 class="heading">Welcome to Techy Software</h2>
+            <p class="header">We specialize in creating websites that fit your budget perfectly.</p>
+            <p class="text">At Nexus Info, we offer tailored website solutions designed for your business. Coupled with business growth ideas and strategies, our goal is to foster the expansion of your business. We believe in making every business thrive in both digital and offline realms. “Join the future trend of business with the help of Nexus Info, and let’s grow together.</p>
+        </section>
+
+        <section id="about">
+            <h2 class="heading">About Us</h2>
+            <p class="header">We operate digitally, foregoing offline offices and unnecessary expenses.</p>
+            <p class="text">Nexus Info, founded by a young entrepreneur, boasts a dynamic team of enthusiastic individuals, adept at navigating the currents of the latest trends. With a commitment to excellence, we employ optimized techniques to enhance your business through flawlessly crafted websites and innovative ideations. Our mission is to deliver customized websites tailored to your business needs, ensuring a strong online presence within your industry</p>
+        </section>
+        
+
+        <section id="products">
+            <h2 class="heading">Our Products/Services</h2>
+            <p>We offer a range of services including...</p>
+            <div class="product-images">
+                <div>
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/Business-Website.png" alt="Business Website">
+                        <p class="header" >Business Website</p>
+                        <p>Transform your offline business into a thriving online presence, captivating clients by showcasing your business's uniqueness through a dedicated website.</p>
+                    </div>
+
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/Ecommerce.png" alt="Ecommerce Website">
+                        <p class="header" >E-Commerce Website</p>
+                        <p>Transform your offline business into a thriving online presence, captivating clients by showcasing your business's uniqueness through a dedicated website.</p>
+                    </div>
+
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/Customized-Website.png" alt="Customized Website">
+                        <p class="header" >Custom Website</p>
+                        <p>Tailored solutions to meet your unique needs, ensuring your business stands out in the digital landscape. Let us craft a customized strategy to elevate your online presence and drive success.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/Educations.png" alt="Education Website">
+                        <p class="header" >Education Platform</p>
+                        <p>Empower learning through a dedicated online platform for educational excellence.</p>
+                    </div>
+
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/design.png" alt="Design Service">
+                        <p class="header" >Design Service</p>
+                        <p>Elevate brand aesthetics with our creative design solutions for a memorable presence.</p>
+                    </div>
+
+                    <div class="container">
+                        <img src="https://nexusinfo.in/wp-content/uploads/2024/02/business-consulting.png" alt="Business Consultant">
+                        <p class="header" >Business Consultant</p>
+                        <p>Partner with us for strategic guidance, navigating the path to success with expert insights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="heading">Contact Us</h2>
+            <p>Feel free to contact us if you are interested in our services!</p>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="feedback">
+            <h2 class="heading">Feedback</h2>
+            <p>Feel free to leave feedback!</p>
+            <form id="feedback-form">
+                <label for="feedback-name">Name:</label>
+                <input type="text" id="feedback-name" name="name" required>
+                <label for="feedback-email">Email:</label>
+                <input type="email" id="feedback-email" name="email" required>
+                <label for="feedback-message">Feedback:</label>
+                <textarea id="feedback-message" name="message" required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://api.whatsapp.com/send?phone=918778993293" class="fab fa-whatsapp"></a>
+            <a href="https://www.instagram.com/nexusinfo.in/" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/company/nexus-software-pvt-ltd/" class="fab fa-linkedin"></a>
+        </div>
+        <p>&copy; 2024 Techy Software. All rights reserved.</p>
+    </footer>
+</body>
+</html>
